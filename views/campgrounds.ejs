@@ -1,7 +1,13 @@
+<% include partials/header %>
+<script src="js/campgrounds.js"></script>
+
 <h1>America's Finest Campgrounds</h1>
 
 <ul>
-    <% sites.forEach(function(site){ %>
-        <li><%=site%></li>
+    <% campgrounds.forEach(function(campground){ %>
+        <li><%= campground.name %></li>
+        <img src="<%=campground.image%>" height="300px" width="300px">
    <% }); %>
 </ul>
+
+<% include partials/footer %>

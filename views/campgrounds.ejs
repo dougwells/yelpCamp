@@ -1,18 +1,19 @@
 <% include partials/header %>
-<h1>America's Finest Parks</h1>
 
-<ul>
-    <% campgrounds.forEach(function(campground){ %>
-        <li><%= campground.name %></li>
-        <img src="<%=campground.image%>" height="300px" width="300px">
-        <hr>
-   <% }); %>
-</ul>
+<div class="container">
+    <div class="jumbotron">
+        <h1>America's Finest Parks</h1>
+    </div>
 
-<form action="https://webdevbootcamp-dougwells.c9users.io/campgrounds" method="POST">
-    <input type="text" name="campName" placeholder="Camp Name" id="campName">
-    <input type="text" name="imageUrl" placeholder="Image URL" id="imageUrl">
-    <button class="btn btn-sm btn-primary">Submit</button>
-</form>
+<div class="row">
+            <% campgrounds.forEach(function(campground){ %>
+                <div class = "col-md-4 col-sm-6">
+                    <div class="text-center"><%= campground.name %></div>
+                    <img src="<%=campground.image%>" height="300px" width="300px">
+                </div>
+           <% }); %>
+</div>
+
+</div>
 
 <% include partials/footer %>

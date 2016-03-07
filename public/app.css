@@ -1,10 +1,15 @@
 body{
-    color: yellow;
+    color: white;
     background: grey;
+}
+
+.jumbotron h1 {
+    color: black;
 }
 
 ul li {
     list-style-type: none;
+    display: inline-block;
 }
 
 img{

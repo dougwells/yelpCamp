@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Demo App</title>
+        <title>Yelp Camp</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="app.css">
+        
+        <!--./app.css is referenced via "static" file declared in app.js  Therefore, relative to "public" directory-->
+        <!--"./" simply says start at the current directory.  ../ would be if needed to go up one directory first-->
+        
+        <link rel="stylesheet" href="./app.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>

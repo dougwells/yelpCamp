@@ -2,3 +2,11 @@ body{
     color: yellow;
     background: grey;
 }
+
+ul li {
+    list-style-type: none;
+}
+
+img{
+    margin: 5px 0 10px 0;
+}

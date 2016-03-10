@@ -50,7 +50,17 @@ app.get("/campgrounds/new", function(req, res){
 });
 
 app.get("/campgrounds/:id", function(req, res){
-    res.send("Show Page --Comming Soon!")
+    var id = req.params.id;
+    Campground.find({_id:id}, function(err, campground){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(campground);
+            res.render('campground',{campground:campground}); 
+        }
+    });
+
+
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){

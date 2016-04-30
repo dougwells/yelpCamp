@@ -31,7 +31,6 @@ router.post("/", isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to campgrounds page
-            console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
     });
@@ -49,13 +48,44 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(foundCampground)
             //render show template with that campground
             res.render("campgrounds/show", {campground: foundCampground});
         }
     });
 });
+//Edit Campground Route
 
+router.get('/:id/edit', function(req, res){
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err);
+        }else{
+            res.render('campgrounds/edit', {campground:campground});  
+        }
+    });
+});
+
+//Update Campground Route
+router.put('/:id', function(req, res){
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/campgrounds/'+req.params.id);
+        }
+    })
+});
+
+//Delete Campground
+router.delete('/:id', function(req, res){
+   Campground.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           console.log(err);
+       }else{
+        res.redirect('/campgrounds'); 
+       }
+   });
+});
 
 //middleware
 function isLoggedIn(req, res, next){

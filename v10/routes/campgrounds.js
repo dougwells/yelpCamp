@@ -2,6 +2,11 @@ var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
 
+//middleware
+var middlewareObj = require('../middleware/index.js');
+var isLoggedIn = middlewareObj.isLoggedIn;
+var checkCampgroundOwnership = middlewareObj.checkCampgroundOwnership;
+
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
     // Get all campgrounds from DB
@@ -72,8 +77,6 @@ router.put('/:id', checkCampgroundOwnership, function(req, res){
         if(err){
             console.log(err);
         }else{
-            console.log(req.body.campground);
-            console.log(campground);
             res.redirect('/campgrounds/'+req.params.id);
         }
     });
@@ -90,30 +93,6 @@ router.delete('/:id', checkCampgroundOwnership, function(req, res){
    });
 });
 
-//middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
 
-function checkCampgroundOwnership(req, res, next){
-    if(req.isAuthenticated()){
-        Campground.findById(req.params.id, function(err, campground){
-            if(err){
-              res.redirect("back");
-            }else{
-              if(campground.author.id.equals(req.user._id)){
-                   next();
-                }else{
-                   res.redirect("back");
-                }
-            }   
-        });
-    }else{
-        res.redirect("back");
-    }
-}
 
 module.exports = router;

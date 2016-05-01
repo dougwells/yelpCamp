@@ -15,16 +15,17 @@
                 <div class="caption-full">
                     <h4 class="pull-right">$9.00/night</h4>
                     <h4><a><%=campground.name%></a></h4>
-                    <div class="text-right">
-                        <a class="btn btn-info" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-                    </div>
                     <p><%= campground.description %></p>
                     <p>
                         <em>Submitted By <%= campground.author.username %></em>
                     </p>
-                    <form action="/campgrounds/<%=campground._id%>?_method=Delete" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                    
+                    <% if (currentUser && campground.author.id.equals(user._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
                 </div>
             </div>
             <div class="well">
@@ -40,7 +41,14 @@
                             <p>
                                 <%= comment.text %> 
                             </p>
-                           
+                        </div>
+                    </div>
+                    <div class = "row">
+                        <div class="col-md-12">
+                            <a class="btn btn-xs" href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit Comment</a>
+                            <form id="delete-comment-form" action="/campgrounds/<%= campground._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>                    
                         </div>
                     </div>
                 <% }) %>
